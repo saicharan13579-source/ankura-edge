@@ -886,12 +886,12 @@ add({id:"ch-arrive",ch:3,title:"Chapter three · Arriving home",h:8.4,dark:true,
  <p class="story" data-a style="--d:4">Every journey home ends at the same place. The gate sets the scale, the materials and the tone for every street behind it.</p></div></div>`});
 
 add({id:"entrance-arch",ch:3,title:"The entrance arch",h:8.5,dark:true,cls:"gate",thumb:"EA-02",
- html:`<div class="stage" id="gStage">${GATE.map((g,i)=>`<img class="gimg${i?'':' on'}" data-src="${IMG(g.code)}" alt="Option ${g.k} · ${g.name}">`).join('')}
+ html:`<div class="stage" id="gStage">${GATE.map((g,i)=>`<img class="gimg${i?'':' on'}" data-src="${IMG(g.code)}" alt="Option ${g.k} · ${g.name}">`).join('')}<img class="gimg" data-src="${IMG('EA-02N')}" alt="The entrance arch at night">
    <div class="wipe" id="gWipe"><img id="wBase" alt=""><img class="top" id="wTop" alt=""><span class="wl" style="left:20px" id="wlL"></span><span class="wl" style="right:20px" id="wlR"></span><div class="handle" id="wHandle" tabindex="0" role="slider" aria-label="Compare options" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></div></div></div>
  <div style="position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(0deg,rgba(10,14,9,.6),transparent 45%)"></div>
  <div class="inner"><div class="gpanel" data-a style="--d:1">
    <p class="kicker">The entrance arch</p>
-   <h3 id="gName"></h3><p id="gLine"></p><div class="gfeats" id="gFeats"></div>
+   <div class="toggle" style="margin:0 0 14px"><button aria-pressed="true" data-gt="0">Day</button><button aria-pressed="false" data-gt="1">Night</button></div><h3 id="gName"></h3><p id="gLine"></p><div class="gfeats" id="gFeats"></div>
    <p class="hint" style="color:rgba(255,255,255,.6);margin-top:12px">The guard cabin sits on the left, with a speed breaker at the gate line and a paved walk on the right.</p>
  </div></div>`,init:initGate});
 
@@ -1234,9 +1234,11 @@ function initClub(sl){
  $('#sheets').innerHTML=M.clubSheets.map(([k,l])=>`<button class="sheet" data-sheet="${k}" data-title="Club house · ${l}"><img src="plan/${k}.webp" alt="${l}" loading="lazy"><span><b>${k}</b> · ${l}</span></button>`).join('');
 }
 
-function initGate(sl){const g=GATE[0];$$('.gimg',sl).forEach(im=>{im.classList.add('on');im.style.cursor='zoom-in';im.onclick=()=>lbOpen([[g.code,'The entrance arch · '+g.name]],0)});
+function initGate(sl){const g=GATE[0];const ims=$$('.gimg',sl);const L=[[g.code,'The entrance arch · by day'],['EA-02N','The entrance arch · at night']];
+ const set=v=>{ims.forEach((im,j)=>im.classList.toggle('on',j===v));$$('[data-gt]',sl).forEach(b=>b.setAttribute('aria-pressed',+b.dataset.gt===v))};
+ ims.forEach((im,j)=>{im.style.cursor='zoom-in';im.onclick=()=>lbOpen(L,j)});$$('[data-gt]',sl).forEach(b=>b.onclick=()=>{set(+b.dataset.gt);clearTimeout(T)});
  $('#gName').textContent='The '+g.name;$('#gLine').textContent=g.line;$('#gFeats').innerHTML=g.feats.map(f=>`<span>${f}</span>`).join('');$('#gStage').style.pointerEvents='auto';
-}
+ let T=null;const s=S.find(x=>x.el===sl);s.onEnter=()=>{set(0);clearTimeout(T);T=setTimeout(()=>set(1),4500)};s.onLeave=()=>clearTimeout(T);set(0)}
 
 function initWidths(sl){
  const W=$('#widths');const scale=100/40;

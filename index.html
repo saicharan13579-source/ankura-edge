@@ -427,6 +427,7 @@ h3{font-size:clamp(26px,2.4vw,38px)}
 .gpanel p{font-size:15px;line-height:1.6;color:rgba(238,240,230,.84);margin:0}
 .gfeats{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
 .gfeats span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:99px;border:1px solid rgba(255,255,255,.22)}
+.gtog button{color:rgba(255,255,255,.8)}
 .gcmp{display:flex;gap:10px;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.14);font-size:13px;flex-wrap:wrap}
 .gcmp select{font:inherit;font-size:13px;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:4px 6px}
 .gcmp select option{color:#000}
@@ -938,7 +939,7 @@ html,body{overflow-x:clip}
  <div class="ghead"><p class="eyebrow" data-r style="justify-content:flex-end;color:var(--gold-2)">Chapter three</p><h2 class="split">Arriving <em>home</em></h2></div>
  <div class="gpanel" data-r>
   <p class="eyebrow" style="color:var(--gold-2);margin-bottom:16px">The entrance arch</p>
-  <h3 id="gName"></h3><p id="gLine"></p><div class="gfeats" id="gFeats"></div>
+  <div class="toggle vtog gtog" style="margin:0 0 14px"><button aria-pressed="true" data-gt="0">Day</button><button aria-pressed="false" data-gt="1">Night</button></div><h3 id="gName"></h3><p id="gLine"></p><div class="gfeats" id="gFeats"></div>
   <p class="hint" style="color:rgba(255,255,255,.6);margin-top:12px">The guard cabin sits on the left, with a speed breaker at the gate line and a paved walk on the right.</p>
  </div>
 </section>
@@ -1003,7 +1004,7 @@ html,body{overflow-x:clip}
 <!-- ============ GALLERY ============ -->
 <section class="pad" id="gallery">
  <div class="wrap">
-  <div class="head2"><div><p class="eyebrow" data-r>Gallery</p><h2 class="split">Every <em>view</em></h2></div><p class="lede" data-r style="--d:2">All 63 views of Ankura – Edge. Filter by place, then tap any view to see it full screen.</p></div>
+  <div class="head2"><div><p class="eyebrow" data-r>Gallery</p><h2 class="split">Every <em>view</em></h2></div><p class="lede" data-r style="--d:2">All 64 views of Ankura – Edge. Filter by place, then tap any view to see it full screen.</p></div>
   <div class="gfilter" id="gfilter"></div>
   <div class="ggrid" id="ggrid"></div>
  </div>
@@ -1255,9 +1256,9 @@ function liveMood(){const h=new Date(Date.now()+(330+new Date().getTimezoneOffse
 function setMood(sel){moodSel=sel;MOOD=sel==='live'?liveMood():sel;const M=MOODS[MOOD];
  $$('#moods button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mood===sel));
  $('#in-sky').style.background=`linear-gradient(180deg,${M.sky[0]},${M.sky[1]})`;
- ['#in-gate img','#in-street img'].forEach(s=>{$(s).style.filter=M.filter;$(s).style.transition='filter 1.4s'});
+ ['#in-street img'].forEach(s=>{$(s).style.filter=M.filter;$(s).style.transition='filter 1.4s'});
  $('#grade').style.background=M.grade;$('#grade2').style.background=M.g2;
- const aim=$('#in-aer img');const want=M.night?'img/SITE-NIGHT.webp':MOOD==='sunset'?'img/SITE-DUSK.webp':'img/SITE-01.webp';if(!aim.src.endsWith(want))aim.src=want;aim.style.filter=(M.night||MOOD==='sunset')?'none':M.filter;const nimg=$('#in-night img');if(M.night&&nimg.dataset.src){nimg.src=nimg.dataset.src;nimg.removeAttribute('data-src')}
+ const aim=$('#in-aer img');const want=M.night?'img/SITE-NIGHT.webp':MOOD==='sunset'?'img/SITE-DUSK.webp':'img/SITE-01.webp';if(!aim.src.endsWith(want))aim.src=want;const gim=$('#in-gate img'),gw=M.night?'img/EA-02N.webp':'img/EA-02.webp';if(!gim.src.endsWith(gw))gim.src=gw;gim.style.filter=M.night?'none':M.filter;aim.style.filter=(M.night||MOOD==='sunset')?'none':M.filter;const nimg=$('#in-night img');if(M.night&&nimg.dataset.src){nimg.src=nimg.dataset.src;nimg.removeAttribute('data-src')}
  clouds.light=M.light;clouds.shade=M.shade; intro();
  sound.moodChanged&&sound.moodChanged();
 }
@@ -1503,8 +1504,13 @@ const M=MASTER, T=Object.fromEntries(M.types.map(t=>[t.k,t]));const tName=t=>`${
  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){if(!user&&!RM)v.play().catch(()=>{})}else v.pause()}),{threshold:.35}).observe(v);st()})();
 
 /* ---------- arrival / gate ---------- */
-(function(){const g=GATE[0];$$('.gimg').forEach(im=>{im.classList.add('on');im.style.cursor='zoom-in';im.dataset.view=1;im.onclick=()=>lbOpen([[g.code,'The entrance arch · '+g.name]],0)});
- $('#gName').textContent='The '+g.name;$('#gLine').textContent=g.line;$('#gFeats').innerHTML=g.feats.map(f=>`<span>${f}</span>`).join('')})();
+(function(){const g=GATE[0];const st=$('#gStage');const day=$('.gimg',st);const n=document.createElement('img');n.className='gimg';n.src='img/EA-02N.webp';n.alt='The entrance arch at night';n.loading='lazy';day.after(n);
+ const ims=[day,n],L=[[g.code,'The entrance arch · by day'],['EA-02N','The entrance arch · at night']];
+ const set=v=>{ims.forEach((im,j)=>im.classList.toggle('on',j===v));$$('[data-gt]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.gt===v))};
+ ims.forEach((im,j)=>{im.style.cursor='zoom-in';im.dataset.view=1;im.onclick=()=>lbOpen(L,j)});
+ $$('[data-gt]').forEach(b=>b.onclick=()=>{set(+b.dataset.gt);clearInterval(T)});
+ $('#gName').textContent='The '+g.name;$('#gLine').textContent=g.line;$('#gFeats').innerHTML=g.feats.map(f=>`<span>${f}</span>`).join('');
+ let T=null,k=0;new IntersectionObserver(es=>es.forEach(e=>{clearInterval(T);if(e.isIntersecting)T=setInterval(()=>set(++k%2),5000)}),{threshold:.4}).observe(st);set(0)})();
 
 /* ---------- streets ---------- */
 (function(){const W=$('#widths'),scale=100/40;
@@ -1554,7 +1560,7 @@ $('#fam').innerHTML=FAM.map((f,i)=>`<article class="fcard" data-r style="--d:${i
 
 /* ---------- gallery ---------- */
 (function(){const ALL=[];const add=(cat,list)=>list.forEach(([c,t])=>ALL.push({c,t,cat}));
- add('Aerial',[["SITE-01","From above the stream"],["SITE-02","From the highway side"],["SITE-DUSK","Ankura – Edge at dusk"],["SITE-NIGHT","Ankura – Edge at night"]]);add('Villa',[["VE-DAY","The villa by day"],["VE-NIGHT","The villa at night"]]);add('Arrival',GATE.map(g=>[g.code,`The entrance arch · ${g.name}`]));
+ add('Aerial',[["SITE-01","From above the stream"],["SITE-02","From the highway side"],["SITE-DUSK","Ankura – Edge at dusk"],["SITE-NIGHT","Ankura – Edge at night"]]);add('Villa',[["VE-DAY","The villa by day"],["VE-NIGHT","The villa at night"]]);add('Arrival',[...GATE.map(g=>[g.code,`The entrance arch · ${g.name}`]),['EA-02N','The entrance arch · at night']]);
  add('Streets',ROADS.r40.shots.map(([c,t])=>[c,'40′ road · '+t]));add('Streets',ROADS.r30.shots.map(([c,t])=>[c,'30′ road · '+t]));
  AMEN.forEach(a=>add('Amenities',a.shots.map(([c,t])=>[c,a.name+' · '+t])));PARKS.forEach(p=>add('Parks',p.shots.map(([c,t])=>[c,p.name+' · '+t])));
  const cats=['All','Villa','Aerial','Arrival','Streets','Amenities','Parks'];
