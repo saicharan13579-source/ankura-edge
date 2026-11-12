@@ -535,6 +535,18 @@ h2 em,h1 em,.bigq em{background:var(--goldgrad);background-size:250% 100%;-webki
 .stat b{background:linear-gradient(180deg,#1D1812,#5a4526);-webkit-background-clip:text;background-clip:text;color:transparent}
 .recap b{background:var(--goldgrad);-webkit-background-clip:text;background-clip:text;color:transparent}
 body::after{content:"";position:fixed;inset:0;z-index:998;pointer-events:none;opacity:.04;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+@media (orientation:portrait){.inner{padding-top:calc(76px + 2vh)}.ui-btns{gap:4px}.ib{width:40px;height:40px}}
+.land h1 .wd{display:inline-flex;white-space:nowrap}
+@media (orientation:portrait) and (max-width:700px){.land h1{font-size:clamp(44px,16vw,90px);letter-spacing:-.03em}.land-clock,.land-day{display:none}.inner{padding-bottom:110px}.sunarc{width:150%;margin-left:-25%}.chapters{display:none}}
+@media (orientation:portrait) and (min-width:1000px){h2{font-size:clamp(48px,6vw,120px)}.lede{font-size:clamp(18px,1.9vw,30px)}.kicker{font-size:clamp(12px,1.2vw,22px)}.land h1{font-size:clamp(90px,15vw,300px)}}
+@media (orientation:portrait) and (max-width:1300px){#s-villa .inner,#s-master .mgrid{grid-template-columns:1fr!important}#s-master .mgrid{grid-template-rows:55vh auto}}
+.slide .inner{overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
+.slide .inner::-webkit-scrollbar{display:none}
+.sunarc{max-height:46vh}
+@media (max-height:620px){.inner{padding-top:72px;padding-bottom:80px}h2{font-size:clamp(32px,4.6vw,70px)}.lede{font-size:15px;margin-top:12px}.chapter .num{font-size:clamp(70px,12vw,160px)}}
+@media (max-width:900px){.road .inner,.zoning .inner,.villas .inner,.club .inner,.landuse .inner{grid-template-columns:1fr!important}#s-villa .inner{grid-template-columns:1fr!important}#s-villa ol{grid-template-columns:1fr!important}}
+@media (min-width:2200px){html{font-size:118%}}
 </style>
 </head>
 <body>
@@ -753,7 +765,7 @@ add({id:"landing",ch:0,title:"Ankura – Edge",h:6,dark:true,thumb:"R40-01",
  <div class="land-day" data-a="fade" style="--d:7"><i id="landDay"></i></div>
  <div class="land">
    <p class="kicker" data-a style="--d:1">Ankura Homes · A gated villa community</p>
-   <h1 aria-label="Ankura – Edge">${[..."Ankura"].map((c,i)=>`<span class="ch" style="--i:${i}">${c}</span>`).join('')}<span class="dash"></span>${[..."Edge"].map((c,i)=>`<span class="ch" style="--i:${i+7}">${c}</span>`).join('')}</h1>
+   <h1 aria-label="Ankura – Edge"><span class="wd">${[..."Ankura"].map((c,i)=>`<span class="ch" style="--i:${i}">${c}</span>`).join('')}</span><span class="dash"></span><span class="wd">${[..."Edge"].map((c,i)=>`<span class="ch" style="--i:${i+7}">${c}</span>`).join('')}</span></h1>
    <p class="sub" data-a style="--d:9">107 homes, the streets between them, and a day that begins at six.</p>
    <div class="land-row" data-a style="--d:11">
      <button class="begin" data-go="1"><i></i>Begin the story</button>
@@ -844,6 +856,11 @@ add({id:"villa",ch:2,title:"The villa",h:7.8,dark:true,thumb:"VE-DAY",
  init:sl=>{const ims=$$('#veBg img',sl);const set=v=>{ims.forEach((im,j)=>im.style.opacity=j===v?1:0);$$('[data-ve]',sl).forEach(b=>b.setAttribute('aria-pressed',+b.dataset.ve===v))};
   $$('[data-ve]',sl).forEach(b=>b.onclick=()=>set(+b.dataset.ve));ims.forEach((im,j)=>{im.style.cursor='zoom-in';im.onclick=()=>lbOpen([["VE-DAY","The villa by day"],["VE-NIGHT","The villa at night"]],j)});
   let T=null;const s=S.find(x=>x.el===sl);s.onEnter=()=>{set(0);clearTimeout(T);T=setTimeout(()=>set(1),4500)};s.onLeave=()=>clearTimeout(T)}});
+
+add({id:"villa-film",ch:2,title:"The villa · day to dusk",h:18,dark:true,thumb:"VE-NIGHT",
+ html:`<video class="bgv" src="vid/villa.mp4" poster="vid/villa-poster.jpg" muted loop playsinline preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video><div style="position:absolute;inset:0;z-index:1;pointer-events:none" class="shade-b"></div>
+ <div class="inner" style="display:grid;align-content:end"><div><p class="kicker" data-a>From day to dusk</p><h2 class="split" style="--d:1">${split("Watch the light")} <span class="w"><span style="--i:3"><em>change</em></span></span></h2></div></div>`,
+ init:sl=>{const v=$('video',sl);const s=S.find(x=>x.el===sl);s.onEnter=()=>{v.currentTime=0;v.play().catch(()=>{})};s.onLeave=()=>v.pause();if(sl.classList.contains('is-active'))s.onEnter()}});
 
 add({id:"landuse",ch:2,title:"How the land is used",h:8,dark:true,
  html:`<div class="inner landuse"><div>

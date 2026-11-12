@@ -396,6 +396,14 @@ h3{font-size:clamp(26px,2.4vw,38px)}
 .velist span{display:block;font-size:14px;color:rgba(238,230,214,.68);line-height:1.5;margin-top:3px;max-height:0;overflow:hidden;transition:max-height .5s var(--ease)}
 .velist li.on span,.velist li:hover span{max-height:90px}
 @media (max-width:1000px){.vgrid2{grid-template-columns:1fr}.velist span{max-height:none}}
+#vfilm{position:relative;height:100vh;height:100svh;min-height:420px;overflow:hidden;background:#0B0907;color:#fff}
+#vfilm video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vfshade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,6,4,.75),rgba(8,6,4,.05) 50%),linear-gradient(90deg,rgba(8,6,4,.45),transparent 50%)}
+.vfc{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(36px,9vh,110px)}
+.vfplay{margin-top:24px;width:56px;height:56px;border-radius:50%;border:0;background:var(--goldgrad);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.vfplay i{width:14px;height:16px;border-left:4px solid #1A140C;border-right:4px solid #1A140C}
+.vfplay.paused i{width:0;height:0;border-right:0;border-left:15px solid #1A140C;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+@media (orientation:portrait){#vfilm{height:auto;min-height:0;aspect-ratio:9/12}}
 /* ================= ARRIVAL ================= */
 #arrival{height:100vh;height:100svh;min-height:640px;overflow:hidden;color:#fff;background:#111}
 .gstage{position:absolute;inset:0}
@@ -539,7 +547,7 @@ h3{font-size:clamp(26px,2.4vw,38px)}
 .sheet:first-child{grid-column:span 2;grid-row:span 2}
 @media (max-width:1000px){.club{grid-template-columns:1fr}.sheets{height:auto;grid-template-rows:none}.sheet img{height:220px}}
 .landuse{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,5vw,80px);align-items:center}
-.donut{position:relative;width:min(80vw,500px);aspect-ratio:1;margin:auto}
+.donut{position:relative;width:min(100%,500px);aspect-ratio:1;margin:auto}
 .donut svg{width:100%;height:100%;transform:rotate(-90deg)}
 .donut circle{fill:none;stroke-width:15;transition:stroke-dasharray 1.4s var(--ease),stroke-width .3s,opacity .3s}
 .donut circle.seg{cursor:pointer}
@@ -728,6 +736,22 @@ footer{background:#0B0907;border-top:1px solid rgba(212,176,106,.2);color:rgba(2
 .recap{border-top-color:rgba(212,176,106,.4)}
 .recap b{background:var(--goldgrad);-webkit-background-clip:text;background-clip:text;color:transparent}
 @media (prefers-reduced-motion:reduce){body::after{animation:none}.marq div{animation:none}}
+
+/* responsive hardening */
+.in-title h1 .wd{display:inline-flex;white-space:nowrap}
+@media (max-width:560px){.in-title h1{font-size:clamp(46px,17vw,96px)}.in-title h1 .dash{width:.35em}}
+@media (max-height:520px) and (orientation:landscape){.in-cue{display:none}.dleft{top:calc(var(--nav) + 8px);bottom:20px;align-content:start;gap:8px}.dclock{font-size:56px!important}.dclock small{margin-bottom:4px}.dmom{min-height:130px}.dmom p{font-size:15px}}
+.x{}
+@media (orientation:portrait) and (min-width:1000px) and (min-height:1700px){.mgrid,.vgrid2,.club,.landuse{grid-template-columns:1fr!important}.mapbox{height:60vh}.wrap,.nav,.gpanel,.dleft,.in-moods,.in-right,.in-alt,.in-cap,.in-title,.marq,.sndpanel{zoom:1.4}}
+@media (orientation:portrait) and (min-width:1900px) and (min-height:3000px){.wrap,.nav,.gpanel,.dleft,.in-moods,.in-right,.in-alt,.in-cap,.in-title,.marq,.sndpanel{zoom:2.2}}
+@media (min-width:2200px){.wrap,.nav,.gpanel,.dleft,.in-moods,.in-right,.in-alt,.in-cap,.in-title,.marq,.sndpanel{zoom:1.35}}
+@media (min-width:3000px){.wrap,.nav,.gpanel,.dleft,.in-moods,.in-right,.in-alt,.in-cap,.in-title,.marq,.sndpanel{zoom:1.75}}
+
+html,body{overflow-x:clip}
+@media (max-width:900px){[data-r="left"],[data-r="right"]{transform:translateY(30px)}.in[data-r="left"],.in[data-r="right"]{transform:none}}
+@media (max-height:520px) and (orientation:landscape){.in-title h1{font-size:clamp(44px,9vw,90px)}.in-title{bottom:90px}.in-cap b{font-size:clamp(30px,5vw,54px)}.in-alt{display:none}.dclock{font-size:clamp(54px,9vw,96px)}.dmom{min-height:150px}.dmom h3{font-size:28px}.ghead{display:none}.gpanel{bottom:16px;padding:16px;max-width:60%}#arrival{min-height:420px}.vgrid2{grid-template-columns:1fr 1fr}}
+@media (max-width:420px){.recap b{font-size:26px}.mtile b{font-size:22px}.ftab{grid-template-columns:repeat(2,minmax(0,1fr))}.velist b{font-size:18px}}
+
 </style>
 </head>
 <body>
@@ -769,7 +793,7 @@ footer{background:#0B0907;border-top:1px solid rgba(212,176,106,.2);color:rgba(2
   <div class="in-alt"><small>Altitude</small><b><span id="alt">420</span><i>m</i></b></div>
   <div class="in-title" id="inTitle">
     <div class="k">Ankura Homes · A gated villa community</div>
-    <h1 aria-label="Ankura – Edge"><span class="ch" style="--i:0">A</span><span class="ch" style="--i:1">n</span><span class="ch" style="--i:2">k</span><span class="ch" style="--i:3">u</span><span class="ch" style="--i:4">r</span><span class="ch" style="--i:5">a</span><span class="dash"></span><span class="ch" style="--i:7">E</span><span class="ch" style="--i:8">d</span><span class="ch" style="--i:9">g</span><span class="ch" style="--i:10">e</span></h1>
+    <h1 aria-label="Ankura – Edge"><span class="wd"><span class="ch" style="--i:0">A</span><span class="ch" style="--i:1">n</span><span class="ch" style="--i:2">k</span><span class="ch" style="--i:3">u</span><span class="ch" style="--i:4">r</span><span class="ch" style="--i:5">a</span></span><span class="dash"></span><span class="wd"><span class="ch" style="--i:7">E</span><span class="ch" style="--i:8">d</span><span class="ch" style="--i:9">g</span><span class="ch" style="--i:10">e</span></span></h1>
     <p>107 homes at the edge of the fields, and a day that begins at six.</p>
   </div>
   <div class="in-cap" id="inCap">
@@ -881,6 +905,14 @@ footer{background:#0B0907;border-top:1px solid rgba(212,176,106,.2);color:rgba(2
    <ol class="velist" id="veList" data-r style="--d:4"></ol>
   </div>
  </div>
+</section>
+
+<!-- ============ VILLA FILM ============ -->
+<section id="vfilm" aria-label="The villa from day to dusk">
+ <video id="vfVid" src="vid/villa.mp4" poster="vid/villa-poster.jpg" muted loop playsinline preload="metadata"></video>
+ <div class="vfshade"></div>
+ <div class="vfc"><p class="eyebrow" data-r style="color:var(--gold-2)">From day to dusk</p><h2 class="split">Watch the light <em>change</em></h2>
+  <button class="vfplay" id="vfPlay" aria-label="Pause the film"><i></i></button></div>
 </section>
 
 <!-- ============ CLUB ============ -->
@@ -1462,6 +1494,13 @@ const M=MASTER, T=Object.fromEntries(M.types.map(t=>[t.k,t]));const tName=t=>`${
  let done=false,T=null,k=0;new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){if(!done){done=true;set(100);setTimeout(()=>set(15),1300);setTimeout(()=>set(55),2600)}clearInterval(T);T=setInterval(()=>{if(!list.matches(':hover'))pick(k++%EL.length)},3200)}else clearInterval(T)}),{threshold:.4}).observe(v);
  pick(0);
 })();
+
+/* ---------- villa film ---------- */
+(function(){const v=$('#vfVid'),b=$('#vfPlay');let user=false;
+ const st=()=>{b.classList.toggle('paused',v.paused);b.setAttribute('aria-label',v.paused?'Play the film':'Pause the film')};
+ v.addEventListener('play',st);v.addEventListener('pause',st);
+ b.onclick=()=>{user=!v.paused;v.paused?v.play().catch(()=>{}):v.pause()};
+ new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){if(!user&&!RM)v.play().catch(()=>{})}else v.pause()}),{threshold:.35}).observe(v);st()})();
 
 /* ---------- arrival / gate ---------- */
 (function(){const g=GATE[0];$$('.gimg').forEach(im=>{im.classList.add('on');im.style.cursor='zoom-in';im.dataset.view=1;im.onclick=()=>lbOpen([[g.code,'The entrance arch · '+g.name]],0)});
