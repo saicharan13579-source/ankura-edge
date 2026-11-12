@@ -365,6 +365,24 @@ h3{font-size:clamp(26px,2.4vw,38px)}
 .cfplan span{font-size:12.5px;color:var(--ink-2);padding:0 6px 4px}
 @media (max-width:1000px){.cfbody{grid-template-columns:1fr}}
 @media (max-width:560px){.cflist{grid-template-columns:1fr}}
+
+#villa{position:relative;height:100vh;height:100svh;min-height:640px;overflow:hidden;background:#0B0907;color:#fff}
+.vel{position:absolute;inset:0;--x:55%}
+.vel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 18%}
+.vtop{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--x)) 0 0);transition:clip-path .9s var(--ease)}
+.vel.drag .vtop{transition:none}
+.vhandle{position:absolute;top:0;bottom:0;left:var(--x);width:2px;background:linear-gradient(180deg,transparent,#E8CF96 20%,#E8CF96 80%,transparent);transform:translateX(-1px);cursor:ew-resize;touch-action:none;transition:left .9s var(--ease);z-index:3}
+.vel.drag .vhandle{transition:none}
+.vhandle::after{content:"☀ ☾";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:var(--goldgrad);color:#1A140C;display:grid;place-items:center;font-size:15px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.vlab{position:absolute;top:calc(var(--nav) + 24px);z-index:2;padding:6px 14px;border-radius:99px;background:rgba(10,14,9,.55);font-size:12px;letter-spacing:.2em;text-transform:uppercase;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.vlab.l{left:24px}.vlab.r{right:24px}
+#villa::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(8,6,4,.78),rgba(8,6,4,.25) 42%,transparent 60%),linear-gradient(0deg,rgba(8,6,4,.55),transparent 35%);z-index:1}
+.vtext{position:absolute;z-index:4;left:var(--pad);bottom:clamp(40px,9vh,110px);max-width:520px;pointer-events:none}
+.vtext .vtog{pointer-events:auto;margin-top:26px;display:inline-flex;border:1px solid rgba(232,207,150,.4);border-radius:99px;padding:4px;background:rgba(10,8,5,.45);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.vtext .vtog button{border:0;background:none;color:rgba(255,255,255,.8);border-radius:99px;padding:8px 18px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.vtext .vtog button[aria-pressed="true"]{background:var(--goldgrad);color:#1A140C}
+.vtext .lede{color:rgba(255,255,255,.8)}
+@media (max-width:760px){.vtext{right:var(--pad)}.vlab{display:none}}
 /* ================= ARRIVAL ================= */
 #arrival{height:100vh;height:100svh;min-height:640px;overflow:hidden;color:#fff;background:#111}
 .gstage{position:absolute;inset:0}
@@ -708,7 +726,7 @@ footer{background:#0B0907;border-top:1px solid rgba(212,176,106,.2);color:rgba(2
 <header class="nav" id="nav">
   <a class="brand" href="#intro">Ankura – Edge<small>Ankura Homes</small></a>
   <nav class="links" aria-label="Sections">
-    <a href="#idea">Story</a><a href="#land">Land</a><a href="#different">Why Edge</a><a href="#homes">Homes</a><a href="#arrival">Arrival</a><a href="#streets">Streets</a><a href="#day">A day</a><a href="#gallery">Gallery</a>
+    <a href="#idea">Story</a><a href="#land">Land</a><a href="#different">Why Edge</a><a href="#homes">Homes</a><a href="#villa">Villa</a><a href="#arrival">Arrival</a><a href="#streets">Streets</a><a href="#day">A day</a><a href="#gallery">Gallery</a>
   </nav>
   <button class="nbtn snd" id="sndBtn" aria-label="Ambient sound" aria-expanded="false"><span class="eq"><i></i><i></i><i></i><i></i></span><span id="sndLbl">Sound</span></button>
   <a class="nbtn fill" href="present.html" id="presBtn">▶ <span>Present</span></a>
@@ -831,6 +849,23 @@ footer{background:#0B0907;border-top:1px solid rgba(212,176,106,.2);color:rgba(2
  </div>
 </section>
 
+
+<!-- ============ VILLA ELEVATION ============ -->
+<section id="villa" aria-label="The villa elevation">
+ <div class="vel" id="vel">
+  <img class="vbase" src="img/VE-NIGHT.webp" alt="The villa at night" loading="lazy">
+  <div class="vtop"><img src="img/VE-DAY.webp" alt="The villa by day" loading="lazy"></div>
+  <div class="vhandle" id="vHandle" tabindex="0" role="slider" aria-label="Day to night" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55"></div>
+  <span class="vlab l">Day</span><span class="vlab r">Night</span>
+ </div>
+ <div class="vtext">
+  <p class="eyebrow" data-r style="color:var(--gold-2)">The villa</p>
+  <h2 class="split">A home that <em>glows</em> after dark</h2>
+  <p class="lede" data-r style="--d:2">Travertine-toned walls, a terracotta feature panel, floor-to-ceiling glazing and a timber pergola, with planters spilling over the balconies.</p>
+  <div class="toggle vtog" data-r style="--d:3"><button aria-pressed="true" data-v="day">Day</button><button aria-pressed="false" data-v="night">Night</button></div>
+ </div>
+</section>
+
 <!-- ============ CLUB ============ -->
 <section class="pad" id="club" style="background:var(--sand)">
  <div class="wrap club">
@@ -919,7 +954,7 @@ footer{background:#0B0907;border-top:1px solid rgba(212,176,106,.2);color:rgba(2
 <!-- ============ GALLERY ============ -->
 <section class="pad" id="gallery">
  <div class="wrap">
-  <div class="head2"><div><p class="eyebrow" data-r>Gallery</p><h2 class="split">Every <em>view</em></h2></div><p class="lede" data-r style="--d:2">All 59 views of Ankura – Edge. Filter by place, then tap any view to see it full screen.</p></div>
+  <div class="head2"><div><p class="eyebrow" data-r>Gallery</p><h2 class="split">Every <em>view</em></h2></div><p class="lede" data-r style="--d:2">All 61 views of Ankura – Edge. Filter by place, then tap any view to see it full screen.</p></div>
   <div class="gfilter" id="gfilter"></div>
   <div class="ggrid" id="ggrid"></div>
  </div>
@@ -1381,6 +1416,20 @@ const M=MASTER, T=Object.fromEntries(M.types.map(t=>[t.k,t]));const tName=t=>`${
   plan.dataset.sheet=f.sh;plan.dataset.title=f.t;$('#cfPlanLbl').textContent=f.t+' · tap to open and zoom'};
  $$('button',tabs).forEach(b=>b.onclick=()=>show(+b.dataset.i));show(1)})();
 
+
+/* ---------- villa day/night ---------- */
+(function(){const v=$('#vel'),h=$('#vHandle');let drag=false;
+ const set=p=>{p=clamp(p,0,100);v.style.setProperty('--x',p+'%');h.setAttribute('aria-valuenow',Math.round(p));$$('.vtog button').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.v==='day')===(p>=50)))};
+ const fromX=x=>{const r=v.getBoundingClientRect();set((x-r.left)/r.width*100)};
+ h.addEventListener('pointerdown',e=>{drag=true;v.classList.add('drag');h.setPointerCapture(e.pointerId)});
+ h.addEventListener('pointermove',e=>{if(drag)fromX(e.clientX)});
+ h.addEventListener('pointerup',()=>{drag=false;v.classList.remove('drag')});
+ v.addEventListener('click',e=>{if(e.target!==h)fromX(e.clientX)});
+ h.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();set(+h.getAttribute('aria-valuenow')+(e.key==='ArrowLeft'?-5:5))}});
+ $$('.vtog button').forEach(b=>b.onclick=()=>set(b.dataset.v==='day'?100:0));
+ let done=false;new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!done){done=true;set(100);setTimeout(()=>set(18),1300);setTimeout(()=>set(55),2600)}}),{threshold:.5}).observe(v);
+})();
+
 /* ---------- arrival / gate ---------- */
 (function(){const g=GATE[0];$$('.gimg').forEach(im=>{im.classList.add('on');im.style.cursor='zoom-in';im.dataset.view=1;im.onclick=()=>lbOpen([[g.code,'The entrance arch · '+g.name]],0)});
  $('#gName').textContent='The '+g.name;$('#gLine').textContent=g.line;$('#gFeats').innerHTML=g.feats.map(f=>`<span>${f}</span>`).join('')})();
@@ -1433,10 +1482,10 @@ $('#fam').innerHTML=FAM.map((f,i)=>`<article class="fcard" data-r style="--d:${i
 
 /* ---------- gallery ---------- */
 (function(){const ALL=[];const add=(cat,list)=>list.forEach(([c,t])=>ALL.push({c,t,cat}));
- add('Aerial',[["SITE-01","From above the stream"],["SITE-02","From the highway side"]]);add('Arrival',GATE.map(g=>[g.code,`The entrance arch · ${g.name}`]));
+ add('Aerial',[["SITE-01","From above the stream"],["SITE-02","From the highway side"]]);add('Villa',[["VE-DAY","The villa by day"],["VE-NIGHT","The villa at night"]]);add('Arrival',GATE.map(g=>[g.code,`The entrance arch · ${g.name}`]));
  add('Streets',ROADS.r40.shots.map(([c,t])=>[c,'40′ road · '+t]));add('Streets',ROADS.r30.shots.map(([c,t])=>[c,'30′ road · '+t]));
  AMEN.forEach(a=>add('Amenities',a.shots.map(([c,t])=>[c,a.name+' · '+t])));PARKS.forEach(p=>add('Parks',p.shots.map(([c,t])=>[c,p.name+' · '+t])));
- const cats=['All','Aerial','Arrival','Streets','Amenities','Parks'];
+ const cats=['All','Villa','Aerial','Arrival','Streets','Amenities','Parks'];
  $('#gfilter').innerHTML=cats.map((c,i)=>`<button aria-pressed="${!i}" data-c="${c}">${c}<small>${c==='All'?ALL.length:ALL.filter(x=>x.cat===c).length}</small></button>`).join('');
  const G=$('#ggrid');let list=ALL;
  const render=()=>{G.innerHTML=list.map((x,i)=>`<button data-i="${i}" data-view="1"><img src="${TH(x.c)}" alt="${esc(x.t)}" loading="lazy" width="560" height="${x.c.startsWith('SITE')?314:350}"><span>${esc(x.t)}</span></button>`).join('');

@@ -833,6 +833,16 @@ add({id:"villas",ch:2,title:"Thirteen villa designs",h:7.6,
      <button class="vplanbig" id="vplan" aria-label="Open the floor plan"><img alt="Floor plan"></button>
    </div></div>`,init:initVillas});
 
+add({id:"villa",ch:2,title:"The villa",h:7.8,dark:true,thumb:"VE-DAY",
+ html:`<div class="bg" id="veBg"><img data-src="${IMG('VE-DAY')}" alt="The villa by day" class="on"><img data-src="${IMG('VE-NIGHT')}" alt="The villa at night"></div><div style="position:absolute;inset:0;z-index:1;pointer-events:none" class="shade-l"></div>
+ <div class="inner" style="display:grid;align-content:end"><div style="max-width:560px">
+  <p class="kicker" data-a>The villa</p><h2 class="split" style="--d:1">${split("A home that")} <span class="w"><span style="--i:3"><em>glows</em></span></span> ${split("after dark")}</h2>
+  <p class="lede" data-a style="--d:4">Travertine-toned walls, a terracotta feature panel, floor-to-ceiling glazing and a timber pergola, with planters spilling over the balconies.</p>
+  <div class="toggle" data-a style="--d:6;margin-top:24px"><button aria-pressed="true" data-ve="0">Day</button><button aria-pressed="false" data-ve="1">Night</button></div></div></div>`,
+ init:sl=>{const ims=$$('#veBg img',sl);$('#veBg').style.pointerEvents='auto';const set=v=>{ims.forEach((im,j)=>im.classList.toggle('on',j===v));$$('[data-ve]',sl).forEach(b=>b.setAttribute('aria-pressed',+b.dataset.ve===v))};
+  $$('[data-ve]',sl).forEach(b=>b.onclick=()=>set(+b.dataset.ve));ims.forEach((im,j)=>im.onclick=()=>lbOpen([["VE-DAY","The villa by day"],["VE-NIGHT","The villa at night"]],j));
+  let T=null;const s=S.find(x=>x.el===sl);s.onEnter=()=>{set(0);clearTimeout(T);T=setTimeout(()=>set(1),4500)};s.onLeave=()=>clearTimeout(T)}});
+
 add({id:"landuse",ch:2,title:"How the land is used",h:8,dark:true,
  html:`<div class="inner landuse"><div>
    <p class="kicker" data-a>Area statement</p>
