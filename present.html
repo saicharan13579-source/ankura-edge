@@ -795,12 +795,12 @@ add({id:"ch-land",ch:1,title:"Chapter one · The land",h:6.4,dark:true,thumb:"SI
  <p class="story" data-a style="--d:4">It begins with a piece of ground at the edge of the fields, where a stream runs past and the farmland opens out to the horizon.</p></div></div>`});
 
 add({id:"aerial",ch:1,title:"From the air",h:6.5,dark:true,thumb:"SITE-01",
- html:`<div class="bg kb alt" id="aerBg"><img data-src="${IMG('SITE-01')}" alt="Ankura – Edge from above the stream" class="zoomable"><img data-src="${IMG('SITE-02')}" alt="Ankura – Edge from the highway side" class="zoomable"></div><div style="position:absolute;inset:0;z-index:1;pointer-events:none" class="shade-l"></div>
+ html:`<div class="bg kb alt" id="aerBg"><img data-src="${IMG('SITE-01')}" alt="Ankura – Edge from above the stream" class="zoomable"><img data-src="${IMG('SITE-02')}" alt="Ankura – Edge from the highway side" class="zoomable"><img data-src="${IMG('SITE-NIGHT')}" alt="Ankura – Edge at night" class="zoomable"></div><div style="position:absolute;inset:0;z-index:1;pointer-events:none" class="shade-l"></div>
  <div class="inner aerial"><div>
    <p class="kicker" data-a>From the air</p>
    <h2 class="split" style="--d:1">${split("Thirteen acres,")} <span class="w"><span style="--i:3"><em>one</em></span></span> ${split("community")}</h2>
    <p class="lede" data-a style="--d:4">Ankura – Edge sits in Singapur village beside the IQON West layout, reached by a 12 m road from the Chevella–Sangareddy road.</p>
-   <div class="toggle" data-a style="--d:6;margin-top:26px"><button aria-pressed="true" data-av="0">Above the stream</button><button aria-pressed="false" data-av="1">From the highway</button></div>
+   <div class="toggle" data-a style="--d:6;margin-top:26px"><button aria-pressed="true" data-av="0">Above the stream</button><button aria-pressed="false" data-av="1">From the highway</button><button aria-pressed="false" data-av="2">At night</button></div>
  </div>
  <div class="facts">
    <div class="fact" data-a="right" style="--d:5"><i>01</i><span><b>107 villa plots</b> and a club house on a 13 Ac 10 Gts layout.</span></div>
@@ -1101,7 +1101,7 @@ function initLanding(sl){
 function initAerial(sl){const imgs=$$('#aerBg img',sl);imgs[0].classList.add('on');
  const set=v=>{imgs.forEach((im,j)=>{im.classList.remove('on');if(j===v){void im.offsetWidth;im.classList.add('on')}});$$('[data-av]',sl).forEach(b=>b.setAttribute('aria-pressed',+b.dataset.av===v))};
  $$('[data-av]',sl).forEach(b=>b.onclick=()=>set(+b.dataset.av));
- imgs.forEach((im,j)=>im.onclick=()=>lbOpen([["SITE-01","From above the stream"],["SITE-02","From the highway side"]],j));
+ imgs.forEach((im,j)=>im.onclick=()=>lbOpen([["SITE-01","From above the stream"],["SITE-02","From the highway side"],["SITE-NIGHT","Ankura – Edge at night"]],j));
  $('#aerBg').style.pointerEvents='auto';}
 
 function initZoning(sl){
