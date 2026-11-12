@@ -753,6 +753,50 @@ html,body{overflow-x:clip}
 @media (max-height:520px) and (orientation:landscape){.in-title h1{font-size:clamp(44px,9vw,90px)}.in-title{bottom:90px}.in-cap b{font-size:clamp(30px,5vw,54px)}.in-alt{display:none}.dclock{font-size:clamp(54px,9vw,96px)}.dmom{min-height:150px}.dmom h3{font-size:28px}.ghead{display:none}.gpanel{bottom:16px;padding:16px;max-width:60%}#arrival{min-height:420px}.vgrid2{grid-template-columns:1fr 1fr}}
 @media (max-width:420px){.recap b{font-size:26px}.mtile b{font-size:22px}.ftab{grid-template-columns:repeat(2,minmax(0,1fr))}.velist b{font-size:18px}}
 
+
+/* ===== compact desktop (wide, short screens like 1267x602) ===== */
+@media (min-width:1000px) and (max-height:900px){
+ :root{--nav:56px;--pad:clamp(20px,4vw,64px)}
+ body{font-size:15px}
+ .pad{padding:clamp(56px,7vw,100px) 0}
+ h2{font-size:clamp(32px,3.9vw,60px)}
+ h3{font-size:clamp(20px,1.9vw,28px)}
+ .lede{font-size:15.5px;margin-top:16px}
+ .story{font-size:clamp(16px,1.35vw,20px)}
+ .eyebrow{font-size:10.5px;margin-bottom:14px}
+ .head2{margin-bottom:clamp(26px,3vw,44px);gap:18px 44px}
+ .bigq{font-size:clamp(26px,3.1vw,46px)}
+ .stats{margin-top:40px}.stat{padding-top:18px}.stat b{font-size:clamp(28px,2.8vw,44px)}.stat>span{font-size:10.5px;margin-top:10px}
+ .pillars{margin-top:46px;gap:12px}.pillar{aspect-ratio:4/5}.pillar h3{font-size:22px}
+ .aerial{aspect-ratio:16/7}.facts{margin-bottom:0}.fact{padding:16px}.fact span{font-size:13.5px}.fact i{font-size:24px}
+ .diffs{gap:14px}.diff .im{aspect-ratio:16/9}.diff div.t{padding:16px 18px 18px}.diff b{font-size:34px}.diff h3{font-size:20px;margin:8px 0 6px}.diff p{font-size:13.5px}
+ .vs{margin-top:46px}.vs .row>div{padding:11px 18px;font-size:13.5px}
+ .mtiles{gap:10px;margin-bottom:12px}.mtile{padding:10px 14px}.mtile b{font-size:21px}.mtile span{font-size:11.5px}
+ .mapbox{height:min(68vh,620px)}.mside{max-height:min(74vh,680px);padding:16px}.mside h3{font-size:21px}.bignum{font-size:46px}
+ .mgrid{grid-template-columns:minmax(0,1fr) 300px}
+ .vgrid{margin-top:60px}.vrow{padding:7px 6px;font-size:13.5px}.vinfo .size{font-size:clamp(52px,5.4vw,86px)}.vtot b{font-size:32px}.vplanbig img{max-height:60vh}
+ .vgrid2{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}.vgrid2>.vel{max-height:calc(100vh - var(--nav) - 40px);width:min(100%,calc((100vh - var(--nav) - 40px)*1335/1178));justify-self:center;position:sticky;top:calc(var(--nav) + 20px)}
+ .velist{margin-top:16px}.velist li{padding:9px 6px}.velist b{font-size:17px}.velist span{font-size:13px}.vtog button{padding:6px 14px;font-size:11px}
+ .tower{margin-top:20px}.floor{grid-template-columns:130px minmax(0,1fr) 70px;font-size:12.5px}.floor .slab{height:24px}
+ .sheets{height:min(66vh,560px)}.cfloor{margin-top:60px}.cfs{padding:13px 15px}.cfs b{font-size:18px}.cfs span{font-size:12.5px}.cfplan img{max-height:52vh}.cftabs button{padding:6px 12px;font-size:11px}
+ .ghead h2{font-size:clamp(36px,4.4vw,70px)}.gpanel{max-width:470px;padding:18px 20px}.gpanel h3{font-size:26px}.gpanel p{font-size:13.5px}.gtabs,.gfeats{margin-top:10px}
+ .widths{gap:22px;margin-bottom:60px}.wbar{height:46px}.wrow .t{font-size:32px}
+ .road{margin-bottom:80px;grid-template-columns:minmax(0,1.25fr) minmax(300px,.85fr)}.road.flip{grid-template-columns:minmax(300px,.85fr) minmax(0,1.25fr)}.gmain{max-height:62vh}.zrows div{padding:7px 2px;font-size:12.5px}.secsvg{margin-top:14px}
+ .dclock{font-size:clamp(60px,7.5vw,112px)}.dmom{min-height:190px}.dmom h3{font-size:clamp(28px,3vw,44px)}.dmom p{font-size:17px}.dleft{bottom:calc(60px + 3vh)}
+ .parks{margin-top:24px;gap:12px}.park{aspect-ratio:4/5}.park h3{font-size:22px}.park p{font-size:12.5px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+ .fcard .im{aspect-ratio:16/10}.fcard .t{padding:16px}.fcard h3{font-size:22px}.fcard li{font-size:13px}
+ .donut{width:min(100%,380px)}.ulist{margin-top:20px}.urow{padding:10px 4px;font-size:14px}
+ .ggrid{columns:5 220px}
+ #visit h2{font-size:clamp(52px,7.5vw,116px)}.recap{margin-top:34px}.recap b{font-size:clamp(24px,2.4vw,36px)}.ctas{margin-top:30px}.disc{margin-top:30px}
+ .marq{padding:14px 0}.marq div{font-size:clamp(20px,2.2vw,32px)}
+ .in-title{bottom:calc(96px + 4vh)}.in-title h1{font-size:clamp(56px,10vw,150px)}.in-title p{font-size:clamp(17px,1.8vw,26px);margin-top:12px}.in-cap b{font-size:clamp(34px,4.4vw,64px)}.in-alt b{font-size:clamp(32px,3.4vw,52px)}
+ .in-moods button,.in-right button{padding:6px 12px;font-size:11px}.in-cue{bottom:calc(76px + 3vh)}
+ #vfilm .vfc h2{font-size:clamp(40px,5vw,80px)}
+ .brand{font-size:19px}.brand small{font-size:9px;margin-left:10px}
+ .links a{font-size:10.5px;padding:7px 9px;letter-spacing:.13em}.nbtn{padding:7px 12px;font-size:10.5px}
+}
+@media (min-width:1180px) and (max-height:900px){.links{display:flex}.menu{display:none}.nav .nbtn.snd{display:inline-flex}}
+@media (min-width:1180px) and (max-width:1320px) and (max-height:900px){.links a{padding:7px 7px;letter-spacing:.1em}.nav{gap:16px}.brand small{display:none}}
 </style>
 </head>
 <body>
@@ -1004,7 +1048,7 @@ html,body{overflow-x:clip}
 <!-- ============ GALLERY ============ -->
 <section class="pad" id="gallery">
  <div class="wrap">
-  <div class="head2"><div><p class="eyebrow" data-r>Gallery</p><h2 class="split">Every <em>view</em></h2></div><p class="lede" data-r style="--d:2">All 64 views of Ankura – Edge. Filter by place, then tap any view to see it full screen.</p></div>
+  <div class="head2"><div><p class="eyebrow" data-r>Gallery</p><h2 class="split">Every <em>view</em></h2></div><p class="lede" data-r style="--d:2">All <span id="gCount">64</span> views of Ankura – Edge. Filter by place, then tap any view to see it full screen.</p></div>
   <div class="gfilter" id="gfilter"></div>
   <div class="ggrid" id="ggrid"></div>
  </div>
@@ -1565,7 +1609,7 @@ $('#fam').innerHTML=FAM.map((f,i)=>`<article class="fcard" data-r style="--d:${i
  AMEN.forEach(a=>add('Amenities',a.shots.map(([c,t])=>[c,a.name+' · '+t])));PARKS.forEach(p=>add('Parks',p.shots.map(([c,t])=>[c,p.name+' · '+t])));
  const cats=['All','Villa','Aerial','Arrival','Streets','Amenities','Parks'];
  $('#gfilter').innerHTML=cats.map((c,i)=>`<button aria-pressed="${!i}" data-c="${c}">${c}<small>${c==='All'?ALL.length:ALL.filter(x=>x.cat===c).length}</small></button>`).join('');
- const G=$('#ggrid');let list=ALL;
+ const G=$('#ggrid');let list=ALL;$('#gCount').textContent=ALL.length;
  const render=()=>{G.innerHTML=list.map((x,i)=>`<button data-i="${i}" data-view="1"><img src="${TH(x.c)}" alt="${esc(x.t)}" loading="lazy" width="560" height="${x.c.startsWith('SITE')?314:350}"><span>${esc(x.t)}</span></button>`).join('');
   const gio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');gio.unobserve(e.target)}}),{rootMargin:'0px 0px -5% 0px'});
   $$('button',G).forEach((b,i)=>{b.style.transitionDelay=(i%4*70)+'ms';gio.observe(b);b.onclick=()=>lbOpen(list.map(x=>[x.c,x.t]),+b.dataset.i)})};
