@@ -366,23 +366,34 @@ h3{font-size:clamp(26px,2.4vw,38px)}
 @media (max-width:1000px){.cfbody{grid-template-columns:1fr}}
 @media (max-width:560px){.cflist{grid-template-columns:1fr}}
 
-#villa{position:relative;height:100vh;height:100svh;min-height:640px;overflow:hidden;background:#0B0907;color:#fff}
-.vel{position:absolute;inset:0;--x:55%}
-.vel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 18%}
+#villa{background:radial-gradient(ellipse 70% 60% at 25% 40%,rgba(212,176,106,.12),transparent 60%),#0E0B08}
+.vgrid2{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(30px,4.5vw,80px);align-items:start}
+.vgrid2>.vel{position:sticky;top:calc(var(--nav) + 30px);max-height:calc(100vh - var(--nav) - 60px);width:min(100%,calc((100vh - var(--nav) - 60px)*1335/1178));justify-self:center}
+.vel{position:relative;aspect-ratio:1335/1178;border-radius:24px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 0 1px rgba(212,176,106,.25);--x:55%}
+.vel img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .vtop{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--x)) 0 0);transition:clip-path .9s var(--ease)}
-.vel.drag .vtop{transition:none}
-.vhandle{position:absolute;top:0;bottom:0;left:var(--x);width:2px;background:linear-gradient(180deg,transparent,#E8CF96 20%,#E8CF96 80%,transparent);transform:translateX(-1px);cursor:ew-resize;touch-action:none;transition:left .9s var(--ease);z-index:3}
-.vel.drag .vhandle{transition:none}
-.vhandle::after{content:"☀ ☾";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:var(--goldgrad);color:#1A140C;display:grid;place-items:center;font-size:15px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.4)}
-.vlab{position:absolute;top:calc(var(--nav) + 24px);z-index:2;padding:6px 14px;border-radius:99px;background:rgba(10,14,9,.55);font-size:12px;letter-spacing:.2em;text-transform:uppercase;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-.vlab.l{left:24px}.vlab.r{right:24px}
-#villa::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(8,6,4,.78),rgba(8,6,4,.25) 42%,transparent 60%),linear-gradient(0deg,rgba(8,6,4,.55),transparent 35%);z-index:1}
-.vtext{position:absolute;z-index:4;left:var(--pad);bottom:clamp(40px,9vh,110px);max-width:520px;pointer-events:none}
-.vtext .vtog{pointer-events:auto;margin-top:26px;display:inline-flex;border:1px solid rgba(232,207,150,.4);border-radius:99px;padding:4px;background:rgba(10,8,5,.45);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
-.vtext .vtog button{border:0;background:none;color:rgba(255,255,255,.8);border-radius:99px;padding:8px 18px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
-.vtext .vtog button[aria-pressed="true"]{background:var(--goldgrad);color:#1A140C}
-.vtext .lede{color:rgba(255,255,255,.8)}
-@media (max-width:760px){.vtext{right:var(--pad)}.vlab{display:none}}
+.vel.drag .vtop,.vel.drag .vhandle{transition:none}
+.vhandle{position:absolute;top:0;bottom:0;left:var(--x);width:2px;background:linear-gradient(180deg,transparent,#E8CF96 15%,#E8CF96 85%,transparent);transform:translateX(-1px);cursor:ew-resize;touch-action:none;transition:left .9s var(--ease);z-index:3}
+.vhandle::after{content:"☀ ☾";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:var(--goldgrad);color:#1A140C;display:grid;place-items:center;font-size:14px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.vlab{position:absolute;top:14px;z-index:2;padding:5px 12px;border-radius:99px;background:rgba(10,8,5,.6);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff}
+.vlab.l{left:14px}.vlab.r{right:14px}
+.vpins{position:absolute;inset:0;z-index:4;pointer-events:none}
+.vpin{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:rgba(17,14,10,.75);border:1.5px solid #E8CF96;color:#EBD39C;font-size:11px;font-weight:700;display:grid;place-items:center;pointer-events:auto;cursor:pointer;transition:transform .35s var(--ease),background .3s}
+.vpin::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px solid rgba(232,207,150,.7);opacity:0;transform:scale(.7)}
+.vpin.on{background:var(--goldgrad);color:#1A140C;transform:translate(-50%,-50%) scale(1.25)}
+.vpin.on::after{animation:vping 1.6s ease-out infinite}
+@keyframes vping{0%{opacity:.9;transform:scale(.8)}100%{opacity:0;transform:scale(1.9)}}
+.vtog{margin-top:22px;display:inline-flex;border:1px solid rgba(232,207,150,.4);border-radius:99px;padding:4px;background:rgba(255,255,255,.04)}
+.vtog button{border:0;background:none;color:rgba(255,255,255,.8);border-radius:99px;padding:8px 18px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.vtog button[aria-pressed="true"]{background:var(--goldgrad);color:#1A140C}
+.velist{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:2px;border-top:1px solid rgba(212,176,106,.25)}
+.velist li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;padding:13px 6px;border-bottom:1px solid rgba(212,176,106,.14);cursor:pointer;border-radius:10px;transition:background .3s}
+.velist li:hover,.velist li.on{background:rgba(212,176,106,.08)}
+.velist i{font-style:normal;font-family:var(--serif);font-size:22px;line-height:1.1;background:var(--goldgrad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.velist b{display:block;font-family:var(--serif);font-weight:400;font-size:20px;color:#F3EAD6}
+.velist span{display:block;font-size:14px;color:rgba(238,230,214,.68);line-height:1.5;margin-top:3px;max-height:0;overflow:hidden;transition:max-height .5s var(--ease)}
+.velist li.on span,.velist li:hover span{max-height:90px}
+@media (max-width:1000px){.vgrid2{grid-template-columns:1fr}.velist span{max-height:none}}
 /* ================= ARRIVAL ================= */
 #arrival{height:100vh;height:100svh;min-height:640px;overflow:hidden;color:#fff;background:#111}
 .gstage{position:absolute;inset:0}
@@ -851,18 +862,22 @@ footer{background:#0B0907;border-top:1px solid rgba(212,176,106,.2);color:rgba(2
 
 
 <!-- ============ VILLA ELEVATION ============ -->
-<section id="villa" aria-label="The villa elevation">
- <div class="vel" id="vel">
-  <img class="vbase" src="img/VE-NIGHT.webp" alt="The villa at night" loading="lazy">
-  <div class="vtop"><img src="img/VE-DAY.webp" alt="The villa by day" loading="lazy"></div>
-  <div class="vhandle" id="vHandle" tabindex="0" role="slider" aria-label="Day to night" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55"></div>
-  <span class="vlab l">Day</span><span class="vlab r">Night</span>
- </div>
- <div class="vtext">
-  <p class="eyebrow" data-r style="color:var(--gold-2)">The villa</p>
-  <h2 class="split">A home that <em>glows</em> after dark</h2>
-  <p class="lede" data-r style="--d:2">Travertine-toned walls, a terracotta feature panel, floor-to-ceiling glazing and a timber pergola, with planters spilling over the balconies.</p>
-  <div class="toggle vtog" data-r style="--d:3"><button aria-pressed="true" data-v="day">Day</button><button aria-pressed="false" data-v="night">Night</button></div>
+<section class="pad dark" id="villa" aria-label="The villa elevation">
+ <div class="wrap vgrid2">
+  <div class="vel" id="vel" data-r="left">
+   <img class="vbase" src="img/VE-NIGHT.webp" alt="The villa at night" loading="lazy">
+   <div class="vtop"><img src="img/VE-DAY.webp" alt="The villa by day" loading="lazy"></div>
+   <div class="vhandle" id="vHandle" tabindex="0" role="slider" aria-label="Day to night" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55"></div>
+   <span class="vlab l">Day</span><span class="vlab r">Night</span>
+   <div class="vpins" id="vPins"></div>
+  </div>
+  <div class="vtext">
+   <p class="eyebrow" data-r>The villa · elevation</p>
+   <h2 class="split" style="font-size:clamp(40px,4.4vw,76px)">A home that <em>glows</em> after dark</h2>
+   <p class="lede" data-r style="--d:2">Every villa is wrapped in warm stone and lit from within. Tap an element to find it on the elevation.</p>
+   <div class="toggle vtog" data-r style="--d:3"><button aria-pressed="true" data-v="day">Day</button><button aria-pressed="false" data-v="night">Night</button></div>
+   <ol class="velist" id="veList" data-r style="--d:4"></ol>
+  </div>
  </div>
 </section>
 
@@ -1417,17 +1432,33 @@ const M=MASTER, T=Object.fromEntries(M.types.map(t=>[t.k,t]));const tName=t=>`${
  $$('button',tabs).forEach(b=>b.onclick=()=>show(+b.dataset.i));show(1)})();
 
 
-/* ---------- villa day/night ---------- */
+/* ---------- villa day/night + elements ---------- */
 (function(){const v=$('#vel'),h=$('#vHandle');let drag=false;
+ const EL=[
+  ['Sculpted stone fins','Tapered travertine-toned pilasters frame the facade and bend gently as they rise, giving the box a crafted, hand-shaped edge.',[11,52]],
+  ['Terracotta feature wall','A textured terracotta panel runs two storeys behind the glass, the one warm colour against the stone.',[36,32]],
+  ['Double-height glazing','Black-framed floor-to-ceiling windows with sheer curtains pull daylight deep into the living spaces.',[22,42]],
+  ['Timber pergola roof','Dark timber louvres over the top terrace cast stripes of shade by day and glow with cove light at night.',[52,17]],
+  ['Glass-railed balconies','Cantilevered balconies with frameless glass railings and timber soffits, so the view stays open.',[56,37]],
+  ['Planter ledge','A deep stone planter along the first-floor balcony spills greenery over the edge and softens the facade.',[44,56]],
+  ['Warm layered lighting','Wall sconces, soffit downlights and uplit planting make the villa glow after dark.',[67,48]],
+  ['Stepped entrance','Wide stone steps lead to a dark ribbed door, set back under the cantilever for shelter.',[52,84]]];
+ const list=$('#veList'),pins=$('#vPins');
+ list.innerHTML=EL.map((e,i)=>`<li data-i="${i}"><i>${String(i+1).padStart(2,'0')}</i><div><b>${e[0]}</b><span>${e[1]}</span></div></li>`).join('');
+ pins.innerHTML=EL.map((e,i)=>`<button class="vpin" data-i="${i}" style="left:${e[2][0]}%;top:${e[2][1]}%" aria-label="${e[0]}">${i+1}</button>`).join('');
+ const pick=i=>{$$('li',list).forEach((l,j)=>l.classList.toggle('on',j===i));$$('.vpin',pins).forEach((p,j)=>p.classList.toggle('on',j===i))};
+ $$('li',list).forEach(l=>{l.onmouseenter=l.onclick=()=>pick(+l.dataset.i)});
+ $$('.vpin',pins).forEach(p=>p.onclick=e=>{e.stopPropagation();pick(+p.dataset.i)});
  const set=p=>{p=clamp(p,0,100);v.style.setProperty('--x',p+'%');h.setAttribute('aria-valuenow',Math.round(p));$$('.vtog button').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.v==='day')===(p>=50)))};
  const fromX=x=>{const r=v.getBoundingClientRect();set((x-r.left)/r.width*100)};
  h.addEventListener('pointerdown',e=>{drag=true;v.classList.add('drag');h.setPointerCapture(e.pointerId)});
  h.addEventListener('pointermove',e=>{if(drag)fromX(e.clientX)});
  h.addEventListener('pointerup',()=>{drag=false;v.classList.remove('drag')});
- v.addEventListener('click',e=>{if(e.target!==h)fromX(e.clientX)});
+ v.addEventListener('click',e=>{if(e.target===v||e.target.tagName==='IMG')fromX(e.clientX)});
  h.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();set(+h.getAttribute('aria-valuenow')+(e.key==='ArrowLeft'?-5:5))}});
  $$('.vtog button').forEach(b=>b.onclick=()=>set(b.dataset.v==='day'?100:0));
- let done=false;new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!done){done=true;set(100);setTimeout(()=>set(18),1300);setTimeout(()=>set(55),2600)}}),{threshold:.5}).observe(v);
+ let done=false,T=null,k=0;new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){if(!done){done=true;set(100);setTimeout(()=>set(15),1300);setTimeout(()=>set(55),2600)}clearInterval(T);T=setInterval(()=>{if(!list.matches(':hover'))pick(k++%EL.length)},3200)}else clearInterval(T)}),{threshold:.4}).observe(v);
+ pick(0);
 })();
 
 /* ---------- arrival / gate ---------- */

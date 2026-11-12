@@ -834,13 +834,15 @@ add({id:"villas",ch:2,title:"Thirteen villa designs",h:7.6,
    </div></div>`,init:initVillas});
 
 add({id:"villa",ch:2,title:"The villa",h:7.8,dark:true,thumb:"VE-DAY",
- html:`<div class="bg" id="veBg"><img data-src="${IMG('VE-DAY')}" alt="The villa by day" class="on"><img data-src="${IMG('VE-NIGHT')}" alt="The villa at night"></div><div style="position:absolute;inset:0;z-index:1;pointer-events:none" class="shade-l"></div>
- <div class="inner" style="display:grid;align-content:end"><div style="max-width:560px">
-  <p class="kicker" data-a>The villa</p><h2 class="split" style="--d:1">${split("A home that")} <span class="w"><span style="--i:3"><em>glows</em></span></span> ${split("after dark")}</h2>
-  <p class="lede" data-a style="--d:4">Travertine-toned walls, a terracotta feature panel, floor-to-ceiling glazing and a timber pergola, with planters spilling over the balconies.</p>
-  <div class="toggle" data-a style="--d:6;margin-top:24px"><button aria-pressed="true" data-ve="0">Day</button><button aria-pressed="false" data-ve="1">Night</button></div></div></div>`,
- init:sl=>{const ims=$$('#veBg img',sl);$('#veBg').style.pointerEvents='auto';const set=v=>{ims.forEach((im,j)=>im.classList.toggle('on',j===v));$$('[data-ve]',sl).forEach(b=>b.setAttribute('aria-pressed',+b.dataset.ve===v))};
-  $$('[data-ve]',sl).forEach(b=>b.onclick=()=>set(+b.dataset.ve));ims.forEach((im,j)=>im.onclick=()=>lbOpen([["VE-DAY","The villa by day"],["VE-NIGHT","The villa at night"]],j));
+ html:`<div class="inner" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center">
+  <div id="veBg" data-a="zoom" style="position:relative;aspect-ratio:1335/1178;max-height:70vh;border-radius:22px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px rgba(212,176,106,.3);justify-self:center;width:100%;max-width:calc(70vh*1335/1178)">
+   <img data-src="${IMG('VE-DAY')}" alt="The villa by day" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity 1.2s" class="on">
+   <img data-src="${IMG('VE-NIGHT')}" alt="The villa at night" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity 1.2s;opacity:0"></div>
+  <div><p class="kicker" data-a>The villa · elevation</p><h2 class="split" style="--d:1;font-size:clamp(36px,3.8vw,64px)">${split("A home that")} <span class="w"><span style="--i:3"><em>glows</em></span></span> ${split("after dark")}</h2>
+  <div class="toggle" data-a style="--d:3;margin-top:18px"><button aria-pressed="true" data-ve="0">Day</button><button aria-pressed="false" data-ve="1">Night</button></div>
+  <ol data-a style="--d:4;list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 22px">${[["Sculpted stone fins","Tapered travertine-toned pilasters frame the facade."],["Terracotta feature wall","A two-storey textured panel behind the glass."],["Double-height glazing","Black-framed windows pull light deep inside."],["Timber pergola roof","Louvres that shade by day and glow at night."],["Glass-railed balconies","Cantilevered, with frameless glass and timber soffits."],["Planter ledge","Greenery spilling over the first-floor balcony."],["Warm layered lighting","Sconces, soffit downlights and uplit planting."],["Stepped entrance","Stone steps to a dark ribbed door."]].map((e,i)=>`<li style="border-top:1px solid rgba(212,176,106,.25);padding-top:8px"><b style="font-family:var(--serif);font-weight:400;font-size:18px;color:#F3EAD6"><span style="color:#D4B06A;margin-right:8px">${String(i+1).padStart(2,"0")}</span>${e[0]}</b><span style="display:block;font-size:13px;color:rgba(238,230,214,.68);margin-top:3px">${e[1]}</span></li>`).join("")}</ol></div></div>`,
+ init:sl=>{const ims=$$('#veBg img',sl);const set=v=>{ims.forEach((im,j)=>im.style.opacity=j===v?1:0);$$('[data-ve]',sl).forEach(b=>b.setAttribute('aria-pressed',+b.dataset.ve===v))};
+  $$('[data-ve]',sl).forEach(b=>b.onclick=()=>set(+b.dataset.ve));ims.forEach((im,j)=>{im.style.cursor='zoom-in';im.onclick=()=>lbOpen([["VE-DAY","The villa by day"],["VE-NIGHT","The villa at night"]],j)});
   let T=null;const s=S.find(x=>x.el===sl);s.onEnter=()=>{set(0);clearTimeout(T);T=setTimeout(()=>set(1),4500)};s.onLeave=()=>clearTimeout(T)}});
 
 add({id:"landuse",ch:2,title:"How the land is used",h:8,dark:true,
