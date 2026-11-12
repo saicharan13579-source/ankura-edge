@@ -1079,7 +1079,7 @@ function bgGallery(sl,key,shots,api){
 
 /* ------------------------------------------------ slide inits */
 function initLanding(sl){
- const codes=["R40-01","R40-03","SP-01","ML-01","P1-01","R40-05"];
+ const codes=["R40-01","R40-03","SP-01","ML-01","SITE-DUSK","EA-02N","VE-NIGHT","SITE-NIGHT"];
  const bg=$('#landBg');bg.classList.add('kb');bg.innerHTML=codes.map((c,i)=>`<img src="${IMG(c)}" alt="" class="${i?'':'on'}">`).join('');
  // plan line drawing
  const tpl=$('#zsvgTpl').content||$('#zsvgTpl');
@@ -1090,7 +1090,7 @@ function initLanding(sl){
  $$('path',lp).forEach(p=>{let L=800;try{L=Math.ceil(p.getTotalLength())}catch(e){}p.style.setProperty('--len',L)});
  // day cycle on the landing
  let i=0,T=null,t0=0;const DAY=[6,8,12,16,18.5,20.5];
- const tick=t=>{if(!sl.classList.contains('is-active'))return;const per=5200,k2=((t-t0)%(per*codes.length))/(per*codes.length);const h=6+k2*15;
+ const tick=t=>{if(!sl.classList.contains('is-active'))return;const per=5200,k2=((t-t0)%(per*codes.length))/(per*codes.length);const HS=[6,8,15,17,18.2,19,19.8,20.6,21.4],fi=k2*codes.length,ix=Math.floor(fi),h=HS[ix]+(HS[ix+1]-HS[ix])*(fi-ix);
    $('#landClock').textContent=hhmm(Math.min(h,20.99));$('#landDay').style.width=(k2*100)+'%';
    const [a,b]=skyAt(h);$('#landTint').style.background=`linear-gradient(180deg,${a}66,${b}33)`;
    const idx=Math.floor(k2*codes.length);if(idx!==i){i=idx;$$('img',bg).forEach((im,j)=>{im.classList.remove('on');if(j===i){void im.offsetWidth;im.classList.add('on')}})}
@@ -1300,7 +1300,7 @@ function initParks(sl){
  $$('#ptabs button').forEach(b=>b.onclick=()=>set(+b.dataset.p));
  $('#pline').textContent=PARKS[0].line;window.__park=set;
 }
-function initEnd(sl){const codes=["SP-05","R40-05","OC-05","ML-04"];const bg=$('#endBg');bg.innerHTML=codes.map((c,i)=>`<img src="${IMG(c)}" alt="" class="${i?'':'on'}">`).join('');
+function initEnd(sl){const codes=["SITE-NIGHT","EA-02N","VE-NIGHT","SP-05","R40-05","ML-04"];const bg=$('#endBg');bg.innerHTML=codes.map((c,i)=>`<img src="${IMG(c)}" alt="" class="${i?'':'on'}">`).join('');
  let i=0,T0=null;const s=S.find(x=>x.el===sl);s.onEnter=()=>{clearInterval(T0);T0=setInterval(()=>{i=(i+1)%codes.length;$$('img',bg).forEach((im,j)=>{im.classList.remove('on');if(j===i){void im.offsetWidth;im.classList.add('on')}})},6000)};s.onLeave=()=>clearInterval(T0)}
 
 /* ------------------------------------------------ start */

@@ -1572,7 +1572,7 @@ $('#fam').innerHTML=FAM.map((f,i)=>`<article class="fcard" data-r style="--d:${i
  $$('#gfilter button').forEach(b=>b.onclick=()=>{$$('#gfilter button').forEach(x=>x.setAttribute('aria-pressed',x===b));list=b.dataset.c==='All'?ALL:ALL.filter(x=>x.cat===b.dataset.c);render()});render()})();
 
 /* ---------- closing ---------- */
-(function(){const codes=["SP-05","R40-05","OC-05","ML-04"];const bg=$('#visitBg');let loaded=false,i=0,T0=null;
+(function(){const codes=["SITE-NIGHT","EA-02N","VE-NIGHT","SP-05","R40-05","ML-04"];const bg=$('#visitBg');let loaded=false,i=0,T0=null;
  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){if(!loaded){loaded=true;bg.innerHTML=codes.map((c,j)=>`<img src="${IMG(c)}" alt="" class="${j?'':'on'}">`).join('')}clearInterval(T0);T0=setInterval(()=>{i=(i+1)%codes.length;$$('img',bg).forEach((im,j)=>{im.classList.remove('on');if(j===i){void im.offsetWidth;im.classList.add('on')}})},6000)}else clearInterval(T0)}),{threshold:.2}).observe($('#visit'))})();
 
 /* upgrade thumbs to full images once revealed */
