@@ -838,8 +838,8 @@ html,body{overflow-x:clip}
  <div class="wrap">
   <div class="head2"><div><p class="eyebrow" data-r>Chapter one · The land</p><h2 class="split">Thirteen acres, <em>one</em> community</h2></div>
    <p class="lede" data-r style="--d:2">Ankura – Edge sits in Singapur village beside the IQON West layout, reached by a 12 m road from the Chevella–Sangareddy road.</p></div>
-  <div class="aerial mask" id="aerial" data-r="fade"><img src="img/SITE-01.webp" alt="From above the stream" class="on" loading="lazy"><img src="img/SITE-02.webp" alt="From the highway side" loading="lazy"><img src="img/SITE-NIGHT.webp" alt="Ankura – Edge at night" loading="lazy">
-   <div class="tg"><button aria-pressed="true" data-av="0">Above the stream</button><button aria-pressed="false" data-av="1">From the highway</button><button aria-pressed="false" data-av="2">At night</button></div></div>
+  <div class="aerial mask" id="aerial" data-r="fade"><img src="img/SITE-01.webp" alt="From above the stream" class="on" loading="lazy"><img src="img/SITE-02.webp" alt="From the highway side" loading="lazy"><img src="img/SITE-DUSK.webp" alt="Ankura – Edge at dusk" loading="lazy"><img src="img/SITE-NIGHT.webp" alt="Ankura – Edge at night" loading="lazy">
+   <div class="tg"><button aria-pressed="true" data-av="0">Above the stream</button><button aria-pressed="false" data-av="1">From the highway</button><button aria-pressed="false" data-av="2">At dusk</button><button aria-pressed="false" data-av="3">At night</button></div></div>
   <div class="facts">
    <div class="fact" data-r style="--d:0"><i>01</i><span><b>107 villa plots</b> and a club house on a 13 Ac 10 Gts layout.</span></div>
    <div class="fact" data-r style="--d:1"><i>02</i><span><b>A green edge.</b> A natural stream runs between Edge and IQON West, with a 9 m planted buffer on each side.</span></div>
@@ -1003,7 +1003,7 @@ html,body{overflow-x:clip}
 <!-- ============ GALLERY ============ -->
 <section class="pad" id="gallery">
  <div class="wrap">
-  <div class="head2"><div><p class="eyebrow" data-r>Gallery</p><h2 class="split">Every <em>view</em></h2></div><p class="lede" data-r style="--d:2">All 62 views of Ankura – Edge. Filter by place, then tap any view to see it full screen.</p></div>
+  <div class="head2"><div><p class="eyebrow" data-r>Gallery</p><h2 class="split">Every <em>view</em></h2></div><p class="lede" data-r style="--d:2">All 63 views of Ankura – Edge. Filter by place, then tap any view to see it full screen.</p></div>
   <div class="gfilter" id="gfilter"></div>
   <div class="ggrid" id="ggrid"></div>
  </div>
@@ -1257,7 +1257,7 @@ function setMood(sel){moodSel=sel;MOOD=sel==='live'?liveMood():sel;const M=MOODS
  $('#in-sky').style.background=`linear-gradient(180deg,${M.sky[0]},${M.sky[1]})`;
  ['#in-gate img','#in-street img'].forEach(s=>{$(s).style.filter=M.filter;$(s).style.transition='filter 1.4s'});
  $('#grade').style.background=M.grade;$('#grade2').style.background=M.g2;
- const aim=$('#in-aer img');const want=M.night?'img/SITE-NIGHT.webp':'img/SITE-01.webp';if(!aim.src.endsWith(want))aim.src=want;aim.style.filter=M.night?'none':M.filter;const nimg=$('#in-night img');if(M.night&&nimg.dataset.src){nimg.src=nimg.dataset.src;nimg.removeAttribute('data-src')}
+ const aim=$('#in-aer img');const want=M.night?'img/SITE-NIGHT.webp':MOOD==='sunset'?'img/SITE-DUSK.webp':'img/SITE-01.webp';if(!aim.src.endsWith(want))aim.src=want;aim.style.filter=(M.night||MOOD==='sunset')?'none':M.filter;const nimg=$('#in-night img');if(M.night&&nimg.dataset.src){nimg.src=nimg.dataset.src;nimg.removeAttribute('data-src')}
  clouds.light=M.light;clouds.shade=M.shade; intro();
  sound.moodChanged&&sound.moodChanged();
 }
@@ -1386,7 +1386,7 @@ $$('.pillar img').forEach(im=>{const hi=new Image();hi.onload=()=>im.src=hi.src;
 
 /* ---------- land ---------- */
 (function(){const a=$('#aerial'),ims=$$('img',a);$$('[data-av]',a).forEach(b=>b.onclick=e=>{e.stopPropagation();const v=+b.dataset.av;ims.forEach((im,j)=>im.classList.toggle('on',j===v));$$('[data-av]',a).forEach(x=>x.setAttribute('aria-pressed',x===b))});
- a.addEventListener('click',()=>{const v=ims.findIndex(i=>i.classList.contains('on'));lbOpen([["SITE-01","From above the stream"],["SITE-02","From the highway side"],["SITE-NIGHT","Ankura – Edge at night"]],v)});a.dataset.view=1;
+ a.addEventListener('click',()=>{const v=ims.findIndex(i=>i.classList.contains('on'));lbOpen([["SITE-01","From above the stream"],["SITE-02","From the highway side"],["SITE-DUSK","Ankura – Edge at dusk"],["SITE-NIGHT","Ankura – Edge at night"]],v)});a.dataset.view=1;
  let T=setInterval(()=>{const v=(ims.findIndex(i=>i.classList.contains('on'))+1)%ims.length;$$('[data-av]',a)[v].click()},7000);a.addEventListener('pointerdown',()=>clearInterval(T),{once:true})})();
 (function(){const wrap=$('#mapM');wrap.insertAdjacentHTML('afterbegin',$('#zsvgTpl').innerHTML);const svg=$('svg',wrap);svg.id='svgM';svg.setAttribute('aria-label','Master layout of Ankura – Edge with clickable plots and amenity zones');
  $$('.pl-villa',svg).filter(v=>!v.closest('.pl-iqon')).forEach(v=>v.remove());const gM=el('g',{id:'gM'});svg.insertBefore(gM,$('.co',svg));
@@ -1554,7 +1554,7 @@ $('#fam').innerHTML=FAM.map((f,i)=>`<article class="fcard" data-r style="--d:${i
 
 /* ---------- gallery ---------- */
 (function(){const ALL=[];const add=(cat,list)=>list.forEach(([c,t])=>ALL.push({c,t,cat}));
- add('Aerial',[["SITE-01","From above the stream"],["SITE-02","From the highway side"],["SITE-NIGHT","Ankura – Edge at night"]]);add('Villa',[["VE-DAY","The villa by day"],["VE-NIGHT","The villa at night"]]);add('Arrival',GATE.map(g=>[g.code,`The entrance arch · ${g.name}`]));
+ add('Aerial',[["SITE-01","From above the stream"],["SITE-02","From the highway side"],["SITE-DUSK","Ankura – Edge at dusk"],["SITE-NIGHT","Ankura – Edge at night"]]);add('Villa',[["VE-DAY","The villa by day"],["VE-NIGHT","The villa at night"]]);add('Arrival',GATE.map(g=>[g.code,`The entrance arch · ${g.name}`]));
  add('Streets',ROADS.r40.shots.map(([c,t])=>[c,'40′ road · '+t]));add('Streets',ROADS.r30.shots.map(([c,t])=>[c,'30′ road · '+t]));
  AMEN.forEach(a=>add('Amenities',a.shots.map(([c,t])=>[c,a.name+' · '+t])));PARKS.forEach(p=>add('Parks',p.shots.map(([c,t])=>[c,p.name+' · '+t])));
  const cats=['All','Villa','Aerial','Arrival','Streets','Amenities','Parks'];
