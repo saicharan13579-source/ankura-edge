@@ -573,6 +573,13 @@ body::after{content:"";position:fixed;inset:0;z-index:998;pointer-events:none;op
  .chapter .num{font-size:clamp(64px,9.5vw,140px)}.amen .ano{font-size:clamp(44px,5.2vw,80px)}
  .vinfo .size{font-size:clamp(42px,4.2vw,66px)}
 }
+
+@media (min-width:1000px) and (max-height:900px){
+ .inner{zoom:.88;height:100%;padding-bottom:calc(118px + 2vh)!important}
+ .land{zoom:.88;height:100%;padding-bottom:calc(150px + 3vh)!important}
+ .amen .inner{align-content:end}.amen .lede,.amen .ano{display:none}.amen .gside{align-self:end}#s-master .mgrid{max-height:calc(100% - 20px)}
+ .ui-top,.ui-btns,.ui-count,.chapters,.land-clock,.land-day{zoom:.88}
+}
 </style>
 </head>
 <body>
